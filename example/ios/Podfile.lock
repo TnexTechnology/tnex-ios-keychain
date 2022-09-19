@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - tnexkeychain (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - tnexkeychain (from `.symlinks/plugins/tnexkeychain/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  tnexkeychain:
+    :path: ".symlinks/plugins/tnexkeychain/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  tnexkeychain: 238714149a95773f921cab05d4f965731d449e43
+
+PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+
+COCOAPODS: 1.11.3

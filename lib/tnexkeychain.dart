@@ -11,13 +11,13 @@ class Tnexkeychain {
     return version;
   }
 
-  static Future<bool?> authenticate() async {
-    final bool? au = await _channel.invokeMethod('authenticate');
-    return au;
+  static Future<bool> authenticate(Map<String, Object> args) async {
+    final bool? au = await _channel.invokeMethod('authenticate', args);
+    return au ?? false;
   }
 
-  static Future<bool?> createEntry() async {
+  static Future<bool> createEntry() async {
     final bool? cr = await _channel.invokeMethod('createEntry');
-    return cr;
+    return cr ?? false;
   }
 }

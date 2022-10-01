@@ -38,20 +38,33 @@ public class SwiftTnexkeychainPlugin: NSObject, FlutterPlugin {
           case "createEntry":
             createEntry(result: result)
               break
+          case "checkEntry":
+            checkEntry(result: result)
           default:
               result(FlutterMethodNotImplemented)
       }
   }
     
+    private func checkEntry(result: @escaping FlutterResult) {
+        let entryExists = KeychainHelper.available(key: entryName)
+        result(entryExists)
+    }
+    
     private func createEntry(result: @escaping FlutterResult) {
-        let r = KeychainHelper.createBioProtectedEntry(key: entryName, data: Data(entryContents.utf8))
-        print(r == noErr ? "Entry created" : "Entry creation failed, osstatus=\(r)")
-        if(r == noErr){
-            result(true)
+        let entryExists = KeychainHelper.available(key: entryName)
+        if(!entryExists){
+            let r = KeychainHelper.createBioProtectedEntry(key: entryName, data: Data(entryContents.utf8))
+            print(r == noErr ? "Entry created" : "Entry creation failed, osstatus=\(r)")
+            if(r == noErr){
+                result(true)
+            }else{
+                result(false)
+            }
         }else{
-            result(false)
+            result(true)
         }
     }
+    
     
     private func authenticate(arguments: Dictionary<String, Any>, result: @escaping FlutterResult) {
         var localizedReason = "Vui lòng cài đặt vân tay."

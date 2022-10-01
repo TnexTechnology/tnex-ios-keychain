@@ -39,6 +39,23 @@ class KeychainHelper {
         return access!
     }
     
+    static func available(key: String) -> Bool {
+        let query = [
+            kSecClass as String       : kSecClassGenericPassword,
+            kSecAttrAccount as String : key,
+            kSecReturnData as String  : kCFBooleanTrue,
+            kSecMatchLimit as String  : kSecMatchLimitOne,
+            kSecUseAuthenticationUI as String : kSecUseAuthenticationUIFail] as CFDictionary
+        
+        var dataTypeRef: AnyObject? = nil
+        
+        let status = SecItemCopyMatching(query, &dataTypeRef)
+        
+        // errSecInteractionNotAllowed - for a protected item
+        // errSecAuthFailed - when touch Id is locked
+        return status == noErr || status == errSecInteractionNotAllowed || status == errSecAuthFailed
+    }
+    
     
     static func createBioProtectedEntry(key: String, data: Data) -> OSStatus {
         remove(key: key)

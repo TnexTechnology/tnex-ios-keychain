@@ -20,4 +20,9 @@ class Tnexkeychain {
     final bool? cr = await _channel.invokeMethod('createEntry');
     return cr ?? false;
   }
+
+  static Future<bool> checkEntry() async {
+    final bool? cr = await _channel.invokeMethod('checkEntry');
+    return cr ?? false;
+  }
 }
